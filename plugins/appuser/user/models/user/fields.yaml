@@ -1,0 +1,22 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    id:
+        label: ID
+        disabled: true
+        
+        username:
+            type: text
+            label: Username
+            tab: User
+
+        user_password:
+            label: Password
+            type: password
+        
+        user_token:
+            label: Token
+            type: text
+
