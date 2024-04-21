@@ -7,16 +7,16 @@ fields:
         label: ID
         disabled: true
         
-        username:
-            type: text
-            label: Username
-            tab: User
+    username:
+        label: Username
+        type: text
+        tab: User
 
-        user_password:
-            label: Password
-            type: password
+    user_password:
+        label: Password
+        type: password
         
-        user_token:
-            label: Token
-            type: text
+    user_token:
+        label: Token
+        type: text
 
