@@ -22,21 +22,7 @@ _ide_helper.php
 .phpunit.result.cache
 nbproject
 .phpstorm.meta.php
-*.js
-*.babelrc
-*.env.example
-.htaccess
-*.xml
-*.md
-.jshintrc
 
 # Project
-#/bootstrap
 /vendor
 /modules
-/tests
-/themes
-#/storage
-/app
-
-
