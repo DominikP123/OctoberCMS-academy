@@ -26,5 +26,5 @@ use function React\Promise\all;
         return Response::json($log);
 
     });
-    
+
 ?>

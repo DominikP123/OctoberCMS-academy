@@ -1,6 +1,7 @@
 <?php namespace AppUser\User;
 
 use Backend;
+use Route;
 use System\Classes\PluginBase;
 
 /**
@@ -36,7 +37,16 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
-        //
+        
+    }
+
+    protected function registerRoutes()
+    {
+       /* route::group(['prefix' => 'api'], function()
+        {
+            Route::post('register', 'appuser\user\controllers\TestController@register');
+            Route::post('login', 'appuser\user\controllers\TestController@login');
+        });*/
     }
 
     /**
@@ -72,15 +82,28 @@ class Plugin extends PluginBase
     public function registerNavigation()
     {
         //return []; // Remove this line to activate
-
         return [
-            'user' => [
-                'label' => 'TestController',
-                'url' => Backend::url('appuser/user/testcontroller'),
-                'icon' => 'icon-cube',
+            'users' => [
+                'label'       => 'Users',
+                'url'         => Backend::url('appuser/user/users'),
+                'icon'        => 'icon-address-book',
                 'permissions' => ['appuser.user.*'],
-                'order' => 500,
-            ],
+                'order'       => 500,
+                'sideMenu' => [
+                    'new_user' => [
+                        'label'       => 'New User',
+                        'icon'        => 'icon-plus',
+                        'url'         => Backend::url('appuser/user/users/create'),
+                        'permissions' => ['appuser.user.access_users']
+                    ],
+                    'list_users' => [
+                        'label'       => 'List Users',
+                        'icon'        => 'icon-list',
+                        'url'         => Backend::url('appuser/user/users'),
+                        'permissions' => ['appuser.user.access_users']
+                    ],
+                ]
+            ]
         ];
     }
 }

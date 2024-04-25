@@ -1,6 +1,7 @@
 <?php namespace AppUser\User\Models;
 
 use Model;
+use Hash;
 use October\Rain\Database\Traits\Hashable;
 
 /**
@@ -28,4 +29,11 @@ class User extends Model
      * @var array rules for validation
      */
     public $rules = [];
+    /*
+    public function setPasswordAttribute($value)
+    {
+        if ($value !== '') {
+            $this->attributes['password'] = Hash::make($value);
+        }
+    }*/
 }

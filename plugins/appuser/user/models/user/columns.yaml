@@ -6,3 +6,7 @@ columns:
     id:
         label: ID
         searchable: true
+    username: name
+    password: password
+    token: token
+

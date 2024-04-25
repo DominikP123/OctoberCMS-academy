@@ -6,17 +6,17 @@ fields:
     id:
         label: ID
         disabled: true
-        
     username:
-        label: Username
+        label: username
         type: text
-        tab: User
+        span: left
 
-    user_password:
-        label: Password
-        type: password
+    password:
+        label: password
+        type: text
+        span: right
         
-    user_token:
-        label: Token
+    token:
+        label: token
         type: text
-
+        disabled: true
