@@ -20,3 +20,7 @@ fields:
         label: token
         type: text
         disabled: true
+    delay:
+        label: delay
+        type: switch
+        default: false

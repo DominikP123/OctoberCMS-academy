@@ -1,8 +1,11 @@
 <?php namespace AppUser\User;
 
+use AppUser\User\Classes\AuthService;
 use Backend;
 use Route;
 use System\Classes\PluginBase;
+use App;
+use AppUser\User\Middleware\Middleware;
 
 /**
  * Plugin Information File
@@ -29,7 +32,13 @@ class Plugin extends PluginBase
      */
     public function register()
     {
-        //
+        $this->app->singleton('AuthService', function ($app) {
+            return new AuthService();
+        });
+        
+        $this->app['router']->middleware('Middleware', Middleware::class);
+
+
     }
 
     /**
@@ -37,16 +46,12 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
-        
+
     }
 
     protected function registerRoutes()
     {
-       /* route::group(['prefix' => 'api'], function()
-        {
-            Route::post('register', 'appuser\user\controllers\TestController@register');
-            Route::post('login', 'appuser\user\controllers\TestController@login');
-        });*/
+       //
     }
 
     /**
@@ -56,9 +61,6 @@ class Plugin extends PluginBase
     {
         return []; // Remove this line to activate
 
-        return [
-            'AppUser\User\Components\MyComponent' => 'myComponent',
-        ];
     }
 
     /**

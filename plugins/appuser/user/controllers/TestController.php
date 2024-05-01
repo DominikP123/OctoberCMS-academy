@@ -5,8 +5,9 @@ use Backend\Classes\Controller;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
+
 use Hash;
-#use Request;
+
 
 class TestController extends Controller
 {
@@ -14,21 +15,22 @@ class TestController extends Controller
     {
         $username = $request->input('username');
         $password = $request->input('password');
+
         $user = new User;
         $user->username = $username;
-        $user->password = Hash::make($password);
+        $user->password = $password;
         $user->token = Str::random(20);
-        \Log::info('Received form data:', $request->all());
-
+        $user->delay = false;
         $user->save();
 
         return response()->json(['token' => $user->token], 201);
     }
-
+    
     public function login(Request $request)
     {
         $username = $request->input('username');
         $password = $request->input('password');
+
         $user = User::where('username', $username)->first();
 
         if ($user && Hash::check($password, $user->password)) {
@@ -36,7 +38,7 @@ class TestController extends Controller
             return response()->json(['token' => $user->token]);
             
         }
-    
         return response()->json(['error' => 'Unauthorized'], 401);
     }
+
 }

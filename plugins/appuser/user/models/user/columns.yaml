@@ -9,4 +9,5 @@ columns:
     username: name
     password: password
     token: token
+    delay: delay
 

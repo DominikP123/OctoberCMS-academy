@@ -19,7 +19,7 @@ class User extends Model
      */
     protected $table = 'appuser_user_users';
 
-    protected $fillable = ['username', 'password', 'token'];
+    protected $fillable = ['username', 'password', 'token', 'delay'];
 
     protected $hidden = ['password', 'token'];
 
