@@ -24,23 +24,7 @@ class Plugin extends PluginBase
     }
 
     // REVIEW: funkcie čo nepoužívaš môžeš dať kľudne preč nech sa kód lahšie číta
-
-    /**
-     * register method, called when the plugin is first registered.
-     */
-    public function register()
-    {
-        //
-    }
-
-    /**
-     * boot method, called right before the request route.
-     */
-    public function boot()
-    {
-        //
-    }
-
+    //done
     /**
      * registerComponents used by the frontend.
      */
@@ -69,19 +53,17 @@ class Plugin extends PluginBase
     }
 
     // REVIEW: Celý Log plugin nefunguje ako panel v CMS, mal by si pridať controller pre tento plugin a nastaviť registerNavigation aby sa tam zobrazoval (podobne ako User plugin)
-
+    //done
     /**
      * registerNavigation used by the backend.
      */
     public function registerNavigation()
     {
-        return []; // Remove this line to activate
-
         return [
             'logger' => [
                 'label' => 'Logger',
-                'url' => Backend::url('applogger/logger/mycontroller'),
-                'icon' => 'icon-leaf',
+                'url' => Backend::url('applogger/logger/loggers'),
+                'icon' => 'icon-comments',
                 'permissions' => ['applogger.logger.*'],
                 'order' => 500,
             ],
