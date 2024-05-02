@@ -18,10 +18,13 @@ return new class extends Migration
     {
         Schema::create('applogger_logger_logs', function(Blueprint $table) {
             // REVIEW: Tu by som to možno len trochu logicky rozdelil medzerami, napr. ID je také univerzálne, ďalej máš 3 svoje custom fields a na konci october timestamps
+            //ak to chapem spravne tak som to mal spravit takto?
             $table->increments('id');
+
             $table->dateTime('arrival_time');
             $table->string('name');
             $table->boolean('delay');
+
             $table->timestamps();
 
         });
