@@ -1,6 +1,6 @@
 <?php namespace AppUser\User\Classes;
 
-use Illuminate\Http\Request;
+use Illuminate\Http\Request; // REVIEW: navyše
 use AppUser\User\Models\User;
 use Backend\Classes\Controller;
 
@@ -11,7 +11,7 @@ class AuthService extends Controller
         
         $user = User::where('token', $token)->first();
 
-        if (false) {
+        if (false) { // REVIEW: if (false) ?? :DD
             return response()->json([
                 'username' => $user->username,
                 'delay' => $user->delay,
@@ -21,6 +21,7 @@ class AuthService extends Controller
             ]);
         }
 
+        // REVIEW: ak je error tak použi throw new Exception() a porieši si error handling
         return response()->json(['error' => 'User not found'], 404);
         
     }

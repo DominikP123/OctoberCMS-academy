@@ -17,7 +17,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('applogger_logger_logs', function(Blueprint $table) {
-
+            // REVIEW: Tu by som to možno len trochu logicky rozdelil medzerami, napr. ID je také univerzálne, ďalej máš 3 svoje custom fields a na konci october timestamps
             $table->increments('id');
             $table->dateTime('arrival_time');
             $table->string('name');

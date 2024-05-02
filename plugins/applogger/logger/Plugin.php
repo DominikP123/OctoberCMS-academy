@@ -23,6 +23,8 @@ class Plugin extends PluginBase
         ];
     }
 
+    // REVIEW: funkcie čo nepoužívaš môžeš dať kľudne preč nech sa kód lahšie číta
+
     /**
      * register method, called when the plugin is first registered.
      */
@@ -65,6 +67,8 @@ class Plugin extends PluginBase
             ],
         ];
     }
+
+    // REVIEW: Celý Log plugin nefunguje ako panel v CMS, mal by si pridať controller pre tento plugin a nastaviť registerNavigation aby sa tam zobrazoval (podobne ako User plugin)
 
     /**
      * registerNavigation used by the backend.
