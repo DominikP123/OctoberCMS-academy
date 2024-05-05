@@ -1,30 +1,20 @@
 <?php
 
-Route::group([
-        'prefix' => 'jwt',
-    ], static function () {
 
-    Route::post('login', \ReaZzon\JWTAuth\Http\Controllers\AuthController::class);
-    Route::post('refresh', \ReaZzon\JWTAuth\Http\Controllers\RefreshController::class);
-    Route::post('register', \ReaZzon\JWTAuth\Http\Controllers\RegistrationController::class);
+Route::prefix('admin')->group(function(){
+    Route::post('user', 'AppUser\User\Controllers\UserController@user');
+    Route::post('register', 'AppUser\User\Classes\AuthService@register');
+    Route::get('logs/name', 'AppLogger\Logger\http\controllers\GetLog@getName');
+});
+
+Route::prefix('user/')->middleware('authuserLogin')->group(function(){
+    Route::post('user', 'AppUser\User\http\controllers\UserController@user');
+    Route::post('login', 'AppUser\User\http\controllers\TestController@login');
+    Route::get('logs/name', 'applogger\logger\http\controllers\GetLog@getName');
+
 });
 
 
+Route::post('register', 'AppUser\User\http\controllers\TestController@register');
 
-Route::post('user', 'AppUser\User\Controllers\UserController@user')->middleware('MiddleWare');
-Route::post('/register', 'AppUser\User\Controllers\TestController@register');
-
-
-
-/*
-
-
-Route::post('/login', 'AppUser\User\Controllers\TestController@login');
-
-Route::post('/protected-route', [
-    'middleware' => 'auth',
-    'uses' => 'AppUser\User\Controllers\TestController@getUserInfo'
-]);
-
-*/
 

@@ -1,7 +1,7 @@
 <?php namespace AppUser\User\Models;
 
 use Model;
-use Hash;
+use \October\Rain\Database\Traits\Validation;
 use October\Rain\Database\Traits\Hashable;
 
 /**
@@ -11,8 +11,6 @@ use October\Rain\Database\Traits\Hashable;
  */
 class User extends Model
 {
-    use \October\Rain\Database\Traits\Validation;
-    use Hashable;
 
     /**
      * @var string table name
@@ -29,11 +27,8 @@ class User extends Model
      * @var array rules for validation
      */
     public $rules = [];
-    /*
-    public function setPasswordAttribute($value)
-    {
-        if ($value !== '') {
-            $this->attributes['password'] = Hash::make($value);
-        }
-    }*/
+  
+    public $hasMany = [
+        'applogger_logger_logs' => ['AppLogger/Models/Log', 'key' => 'user_id']
+    ];
 }

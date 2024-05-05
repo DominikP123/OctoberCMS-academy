@@ -3,9 +3,10 @@
 use Closure;
 use Illuminate\Http\Request;
 use AppUser\User\Models\User;
+use AppUser\User\Middleware;
 
 // REVIEW: trochu vágne meno, špecifikoval by som podĽa toho čo to robí
-class Middleware
+class authUserLogin
 {
     public function handle(Request $request, Closure $next) // REVIEW: podobnú logiku už máš inde
     {
@@ -19,4 +20,5 @@ class Middleware
         return redirect()->route('login');
         
     }
+    
 }

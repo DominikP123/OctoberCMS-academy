@@ -16,7 +16,7 @@ class Log extends Model
      */
     public $table = 'applogger_logger_logs';
 
-    protected $fillable = ['arrival_time', 'name', 'delay'];
+    protected $fillable = ['user_id', 'arrival_time', 'name', 'delay'];
 
     public $timestamps = true;
     
@@ -24,4 +24,8 @@ class Log extends Model
      * @var array rules for validation
      */
     public $rules = [];
+
+    public $belongsTo = [
+        'appuser_user_users' => ['AppUser/User/models/User', 'key' => 'user_id']
+    ];
 }

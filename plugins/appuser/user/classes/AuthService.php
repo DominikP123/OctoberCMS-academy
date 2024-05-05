@@ -1,17 +1,22 @@
 <?php namespace AppUser\User\Classes;
 
-use Illuminate\Http\Request; // REVIEW: navyše
 use AppUser\User\Models\User;
 use Backend\Classes\Controller;
+use Exception;
 
 class AuthService extends Controller
 {
     public function getUser($token)
     {
-        
-        $user = User::where('token', $token)->first();
+        try{
+            $user = User::where('token', $token)->first();
 
-        if (false) { // REVIEW: if (false) ?? :DD
+            if (!$user) { // REVIEW: if (false) ?? :DD
+
+                throw new Exception('user not found');
+
+            } 
+
             return response()->json([
                 'username' => $user->username,
                 'delay' => $user->delay,
@@ -19,10 +24,14 @@ class AuthService extends Controller
                 'updated_at' => $user->updated_at,
 
             ]);
-        }
-
         // REVIEW: ak je error tak použi throw new Exception() a porieši si error handling
-        return response()->json(['error' => 'User not found'], 404);
+        //done      
+        } catch(Exception $e){
+
+            return response()->json(['error' => 'Internal server error'], 500);
+
+        }
+         
         
     }
 }

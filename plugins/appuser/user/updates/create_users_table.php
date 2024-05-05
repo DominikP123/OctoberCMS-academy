@@ -19,10 +19,13 @@ return new class extends Migration
         Schema::create('appuser_user_users', function(Blueprint $table) {
 
             $table->increments('id');
+
             $table->string('username')->unique();
             $table->string('password');
             $table->string('token')->nullable();
             $table->boolean('delay');
+            $table->dateTime('login_time');
+
             $table->timestamps();
             
         });

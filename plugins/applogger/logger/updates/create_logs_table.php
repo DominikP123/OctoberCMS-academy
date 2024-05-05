@@ -21,11 +21,14 @@ return new class extends Migration
             //ak to chapem spravne tak som to mal spravit takto?
             $table->increments('id');
 
+            $table->integer('user_id')->nullable();
             $table->dateTime('arrival_time');
             $table->string('name');
             $table->boolean('delay');
 
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('appuser_user_users')->onDelete('cascade');
 
         });
     }

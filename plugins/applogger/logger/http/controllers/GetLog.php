@@ -17,7 +17,7 @@ class GetLog extends Controller
     public function getName(Request $request)
     {
         $name = $request->input('name');
-        $log = Log::where('name', $name)->get();
+        $log = Log::where('name', $name)->get(['arrival_time']);
 
         return response()->json($log);
     }

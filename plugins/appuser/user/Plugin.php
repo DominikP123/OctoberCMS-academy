@@ -33,12 +33,12 @@ class Plugin extends PluginBase
     public function register()
     {
         // REVIEW: authentifikáciu vôbec nemusíč takto komplikovane riešiť, skôr si nájdi ako sa v routes.php riešia prefixy, groupy a middleware a tak to sprav
-        $this->app->singleton('AuthService', function ($app) {
-            return new AuthService();
-        });
+        #$this->app->singleton('AuthService', function ($app) {
+        #    return new AuthService();
+        #});
         
-        $this->app['router']->middleware('Middleware', Middleware::class);
-
+        #$this->app['router']->middleware('Middleware', Middleware::class);
+        
 
     }
 
@@ -47,7 +47,8 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
-
+        $this->app['Illuminate\Contracts\Http\Kernel']
+          ->pushMiddleware('AppUser\User\Middleware\authUserLogin');
     }
 
     protected function registerRoutes()
