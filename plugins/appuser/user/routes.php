@@ -1,5 +1,6 @@
 <?php
 
+use AppUser\User\Middleware\authUserLogin;
 
 Route::prefix('admin/')->group(function(){
     Route::get('user', 'AppUser\User\http\controllers\UserController@user');
@@ -9,7 +10,7 @@ Route::prefix('admin/')->group(function(){
     Route::get('logs/name', 'AppLogger\Logger\http\controllers\GetLog@getName');
 });
 
-Route::prefix('user/')->middleware('authUserLogin')->group(function(){
+Route::prefix('user/')->middleware([authUserLogin::class])->group(function(){
     Route::get('user', 'AppUser\User\http\controllers\UserController@user');
     Route::post('login', 'AppUser\User\http\controllers\Login@login');
     Route::post('logout', 'AppUser\User\http\controllers\LogOut@logOut');

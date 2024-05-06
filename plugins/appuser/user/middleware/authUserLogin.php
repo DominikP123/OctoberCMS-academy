@@ -10,6 +10,7 @@ class authUserLogin
 {
     public function handle(Request $request, Closure $next) // REVIEW: podobnú logiku už máš inde
     {
+        throw new \Exception("Funguje :D");
         $token= $request->input('token');
         $user = User::where('token', $token)->first();
 
