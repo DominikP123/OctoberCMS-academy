@@ -6,3 +6,7 @@ fields:
     id:
         label: ID
         disabled: true
+    delay:
+        label: delay
+        type: switch
+        default: false

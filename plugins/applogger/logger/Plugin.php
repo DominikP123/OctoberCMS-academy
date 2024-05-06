@@ -62,7 +62,7 @@ class Plugin extends PluginBase
         return [
             'logger' => [
                 'label' => 'Logger',
-                'url' => Backend::url('applogger/logger/loggers'),
+                'url' => Backend::url('AppLogger/Logger/Loggers'),
                 'icon' => 'icon-comments',
                 'permissions' => ['applogger.logger.*'],
                 'order' => 500,

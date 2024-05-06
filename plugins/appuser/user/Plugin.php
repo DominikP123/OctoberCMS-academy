@@ -5,6 +5,9 @@ use Backend;
 use Route;
 use System\Classes\PluginBase;
 use App;
+use AppUser\User\Classes\LoginService;
+use AppUser\User\Classes\LogOutService;
+use AppUser\User\Classes\RegisterService;
 use AppUser\User\Middleware\Middleware;
 
 /**
@@ -33,13 +36,18 @@ class Plugin extends PluginBase
     public function register()
     {
         // REVIEW: authentifikáciu vôbec nemusíč takto komplikovane riešiť, skôr si nájdi ako sa v routes.php riešia prefixy, groupy a middleware a tak to sprav
-        #$this->app->singleton('AuthService', function ($app) {
-        #    return new AuthService();
-        #});
-        
-        #$this->app['router']->middleware('Middleware', Middleware::class);
-        
-
+        $this->app->singleton('AuthService', function ($app) {
+            return new AuthService();
+        });
+        $this->app->singleton('LoginService', function ($app) {
+            return new LoginService();
+        });
+        $this->app->singleton('LogOutService', function ($app) {
+            return new LogOutService();
+        });
+        $this->app->singleton('RegisterService', function ($app) {
+            return new RegisterService();
+        });
     }
 
     /**
@@ -47,8 +55,8 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
-        $this->app['Illuminate\Contracts\Http\Kernel']
-          ->pushMiddleware('AppUser\User\Middleware\authUserLogin');
+        #$this->app['Illuminate\Contracts\Http\Kernel']
+         # ->pushMiddleware('AppUser\User\Middleware\authUserLogin');
     }
 
     protected function registerRoutes()
