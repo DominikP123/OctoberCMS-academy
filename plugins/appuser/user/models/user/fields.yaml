@@ -15,7 +15,7 @@ fields:
         label: password
         type: text
         span: right
-        
+        # REVIEW - V columns.yaml/fields.yaml nikdy nedávaj takto medzeri, všetko to môže byť spolu
     token:
         label: token
         type: text

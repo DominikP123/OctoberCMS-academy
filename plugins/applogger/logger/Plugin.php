@@ -10,6 +10,11 @@ use System\Classes\PluginBase;
  */
 class Plugin extends PluginBase
 {
+    /* REVIEW - V migrácii pre logs máš foreign key na usera. V takýchto prípadoch treba v plugine nastaviť $require, čo zabezpečí že určitý plugin sa pripravený predtým ako nejaký iný.
+    V tomto prípade by si mal nastaviť že Logger vyžaduje prítomnosť Usera, pretože keď sa tvorí logs table, tak je tam foreign key ktorý je závislý na existencii users table.
+    Vlastne nastavuješ dependencies. */
+    // public $require = ['AppUser.User'];
+
     /**
      * pluginDetails about this plugin.
      */
@@ -25,6 +30,7 @@ class Plugin extends PluginBase
 
     // REVIEW: funkcie čo nepoužívaš môžeš dať kľudne preč nech sa kód lahšie číta
     //done
+    // REVIEW ešte tu máš registerComponents() a registerPermissions() ktoré nič nerobia lebo hneď na začiatku je return [];
     /**
      * registerComponents used by the frontend.
      */
@@ -52,8 +58,6 @@ class Plugin extends PluginBase
         ];
     }
 
-    // REVIEW: Celý Log plugin nefunguje ako panel v CMS, mal by si pridať controller pre tento plugin a nastaviť registerNavigation aby sa tam zobrazoval (podobne ako User plugin)
-    //done
     /**
      * registerNavigation used by the backend.
      */

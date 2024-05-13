@@ -17,7 +17,7 @@ class authUserLogin
             return $next($request);
         }
 
-        return redirect()->route('login');
+        return redirect()->route('login'); // REVIEW - tomuto úplne nerozumiem prečo robíš, mohol by si mi to napísať do chatu že ako to myslíš? lebo teraz nemáme žiadny FE tak mi nedáva zmysel niečo refirectovať
         
     }
     

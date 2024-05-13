@@ -2,6 +2,9 @@
 
 use AppUser\User\Middleware\authUserLogin;
 
+// REVIEW - Nepoužívaš prefix api/v1, ten by mal byť v každej API route
+// REVIEW - Tu pomeň to čo sme sa bavili :DD
+
 Route::prefix('admin/')->group(function(){
     Route::get('user', 'AppUser\User\http\controllers\UserController@user');
     Route::post('login', 'AppUser\User\http\controllers\Login@login');

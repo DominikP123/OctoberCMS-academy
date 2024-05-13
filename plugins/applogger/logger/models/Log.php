@@ -23,9 +23,13 @@ class Log extends Model
     /**
      * @var array rules for validation
      */
-    public $rules = [];
+    public $rules = []; // REVIEW - rules by som si určite zadefinoval
 
     public $belongsTo = [
+        /* REVIEW - pre relation nemusíš písať celý názov pluginu a tablu, stačí 'user' => [...]
+        a keďže je to one to many relation, čiže Log má jednoho usera, relation meno by malo byť v singulári, t. j. napr. 'user'
+        
+        Zároveň určite použi "use AppUser\User\Models\User;" a tu napíš už iba "User::class" */
         'appuser_user_users' => ['AppUser/User/models/User', 'key' => 'user_id']
     ];
 }

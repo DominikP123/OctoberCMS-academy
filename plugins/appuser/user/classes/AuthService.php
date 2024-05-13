@@ -11,10 +11,8 @@ class AuthService extends Controller
         try{
             $user = User::where('token', $token)->first();
 
-            if (!$user) { // REVIEW: if (false) ?? :DD
-
+            if (!$user) {
                 throw new Exception('user not found');
-
             } 
 
             return response()->json([
@@ -24,14 +22,9 @@ class AuthService extends Controller
                 'updated_at' => $user->updated_at,
 
             ]);
-        // REVIEW: ak je error tak použi throw new Exception() a porieši si error handling
-        //done      
         } catch(Exception $e){
-
+            // REVIEW - Ak sa chytil error mal by si ho znova throw-núť, nie vracať json... A možno by si mohol použiť $e->getMessage() aby si posunul message
             return response()->json(['error' => 'Internal server error'], 500);
-
         }
-         
-        
     }
 }

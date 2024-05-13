@@ -5,7 +5,6 @@ use Illuminate\Http\Request;
 use App;
 use Exception;
 
-// REVIEW: tento controller by si nemal mať vo folderi controllers, lebo je rozdiel medzi october controllermi, a našimi http controllermi ktoré robia logiku requestov, radšej si sprav dolder http/controllers a tam to dávaj
 class UserController extends Controller
 {       
     public function user(Request $request)

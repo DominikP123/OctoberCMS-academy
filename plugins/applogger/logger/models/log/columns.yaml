@@ -3,9 +3,9 @@
 # ===================================
 
 columns:
-    id:
+    id: # REVIEW - ID nie je treba v liste, keďže userovi ani developerovi to nič nepovie, je to len random čislo
         label: ID
         searchable: true
-    arrival_time: Arrival time
+    arrival_time: Arrival time # REVIEW - Úprimne, ani som nevedel, že sa takto dá zadefinovať label pre column :DD. Môžeš to tak kľudne robiť ale väčšinu času budeš potrebovať zadefinovať viac ako label
     name: name
     delay: delay

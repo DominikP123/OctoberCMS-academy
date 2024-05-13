@@ -2,6 +2,8 @@
 #  Form Field Definitions
 # ===================================
 
+# REVIEW - ID vôbec netreba dávať do formu, keďže s ním nevieš interagovať
+# REVIEW - A trebalo by doplniť ostatné údaje o logu aby sa aj dal vytvárať cez CMS
 fields:
     id:
         label: ID

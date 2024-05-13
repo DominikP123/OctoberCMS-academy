@@ -13,23 +13,22 @@ class Login extends Controller
     {
         $username = $request->input('username');
         $password = $request->input('password');
-        $loginService = App::make('LoginService');
+        $loginService = App::make('LoginService'); // REVIEW - takýto spôsob volania classy je komplikovaný, normálne si ju zadefinuj cez "use" a potom volaj login ako static funkciu
 
         try{
 
             $token = $loginService->login($username, $password);
 
-            if (!$token) {
-            // REVIEW: ak je error tak použi throw new Exception() a porieši si error handling
+            if (!$token) { // REVIEW - odsadenie a medzera
             throw new Exception('user not found', $token);
 
             }
 
             return response()->json($token);
 
-        } catch(Exception $e) {
+        } catch(Exception $e) { // REVIEW - medzeri
 
-            return response()->json(['error' => $e->getMessage()], 500);
+            return response()->json(['error' => $e->getMessage()], 500); // REVIEW - throw new Exception(...)
 
         }
     }
