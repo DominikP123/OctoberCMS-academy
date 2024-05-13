@@ -26,7 +26,7 @@ class Login extends Controller
 
             return response()->json($token);
 
-        } catch(Exception $e) { // REVIEW - medzeri
+        } catch(Exception $e) { // REVIEW - medzery
 
             return response()->json(['error' => $e->getMessage()], 500); // REVIEW - throw new Exception(...)
 

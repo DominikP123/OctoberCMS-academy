@@ -22,7 +22,7 @@ class LogOut extends Controller
 
             }     
             
-        } catch(Exception $e){ // REVIEW - medzeri
+        } catch(Exception $e){ // REVIEW - medzery
 
             return response()->json(['error' => 'Internal server error'], 500); // REVIEW - throw new Exception(...)
 

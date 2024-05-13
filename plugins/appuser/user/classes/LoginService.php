@@ -17,7 +17,7 @@ class LoginService extends Controller
 
             if ($user && Hash::check($password, $user->password)) {
 
-                if($user->token == null){ // REVIEW - na viacerých miestach máš takéto zbytočné medzeri :DD vyzerá to kúsok divne, skôr by som dal medzeru za tým if statementom
+                if($user->token == null){ // REVIEW - na viacerých miestach máš takéto zbytočné medzery :DD vyzerá to kúsok divne, skôr by som dal medzeru za tým if statementom
 
                     $user->token = Str::random(20); // REVIEW - táto logika na vytvorenie tokenu sa ti opakuje aj v RegisterService, možno by som to zjednotil do nejakého AuthService
 
@@ -39,7 +39,7 @@ class LoginService extends Controller
 
             return response()->json(['error' => 'Unauthorized'], 401); // REVIEW - throw new Exception($message, $code)
 
-        } catch (Exception $e){ // REVIEW - zas ti medzeri :,D
+        } catch (Exception $e){ // REVIEW - zas ti medzery :,D
 
             return response()->json(['error' => 'Internal server error'], 500); // REVIEW - throw new Exception($message, $code)
 

@@ -15,7 +15,7 @@ class LogOutService extends Controller
         try{
             $user = User::where('token', $token)->first();
 
-            if (!$user) { // REVIEW - medzeri
+            if (!$user) { // REVIEW - medzery
 
                 throw new Exception('user not found');
 
