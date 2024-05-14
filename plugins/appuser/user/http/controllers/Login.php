@@ -3,9 +3,7 @@
 use Backend\Classes\Controller;
 use Illuminate\Http\Request;
 use Exception;
-use App;
-
-
+use AppUser\User\Classes\LoginService;
 
 class Login extends Controller
 {    
@@ -13,24 +11,26 @@ class Login extends Controller
     {
         $username = $request->input('username');
         $password = $request->input('password');
-        $loginService = App::make('LoginService'); // REVIEW - takýto spôsob volania classy je komplikovaný, normálne si ju zadefinuj cez "use" a potom volaj login ako static funkciu
+        
+        $loginService = new LoginService();
+        $loginService->login($username, $password);
 
         try{
 
             $token = $loginService->login($username, $password);
 
-            if (!$token) { // REVIEW - odsadenie a medzera
-            throw new Exception('user not found', $token);
+            if (!$token) { 
+
+                throw new Exception('user not found', $token);
 
             }
 
             return response()->json($token);
 
-        } catch(Exception $e) { // REVIEW - medzery
+        } catch(Exception) { // REVIEW - medzery
 
-            return response()->json(['error' => $e->getMessage()], 500); // REVIEW - throw new Exception(...)
+            throw new Exception('user not found');
 
         }
     }
-
 }

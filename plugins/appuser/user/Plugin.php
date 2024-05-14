@@ -2,13 +2,11 @@
 
 use AppUser\User\Classes\AuthService;
 use Backend;
-use Route;
 use System\Classes\PluginBase;
-use App;
 use AppUser\User\Classes\LoginService;
 use AppUser\User\Classes\LogOutService;
 use AppUser\User\Classes\RegisterService;
-use AppUser\User\Middleware\Middleware;
+
 
 /**
  * Plugin Information File
@@ -35,13 +33,12 @@ class Plugin extends PluginBase
      */
     public function register()
     {
-        // REVIEW: authentifikáciu vôbec nemusíč takto komplikovane riešiť, skôr si nájdi ako sa v routes.php riešia prefixy, groupy a middleware a tak to sprav
         $this->app->singleton('AuthService', function ($app) {
             return new AuthService();
         });
-        $this->app->singleton('LoginService', function ($app) {
-            return new LoginService();
-        });
+        //$this->app->singleton('LoginService', function ($app) {
+         //   return new LoginService();
+       // });
         $this->app->singleton('LogOutService', function ($app) {
             return new LogOutService();
         });
@@ -51,35 +48,10 @@ class Plugin extends PluginBase
     }
 
     /**
-     * boot method, called right before the request route.
-     */
-    public function boot()
-    {
-        #$this->app['Illuminate\Contracts\Http\Kernel']
-         # ->pushMiddleware('AppUser\User\Middleware\authUserLogin');
-    }
-
-    protected function registerRoutes()
-    {
-       //
-    }
-
-    /**
-     * registerComponents used by the frontend.
-     */
-    public function registerComponents()
-    {
-        return []; // Remove this line to activate
-
-    }
-
-    /**
      * registerPermissions used by the backend.
      */
     public function registerPermissions()
     {
-        return []; // Remove this line to activate
-
         return [
             'appuser.user.some_permission' => [
                 'tab' => 'User',
@@ -93,7 +65,6 @@ class Plugin extends PluginBase
      */
     public function registerNavigation()
     {
-        //return []; // Remove this line to activate
         return [
             'users' => [
                 'label'       => 'Users',

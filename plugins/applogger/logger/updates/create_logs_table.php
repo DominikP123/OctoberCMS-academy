@@ -17,12 +17,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('applogger_logger_logs', function(Blueprint $table) {
-            // REVIEW: Tu by som to možno len trochu logicky rozdelil medzerami, napr. ID je také univerzálne, ďalej máš 3 svoje custom fields a na konci october timestamps
-            //ak to chapem spravne tak som to mal spravit takto?
-            // REVIEW - Hej len ešte foreign key sa väčšinou dáva pri údaj ku ktorému sa pripisuje, čiže takto. Potom môžeš vymazať tieto komenty
-            $table->increments('id');
 
-            $table->integer('user_id')->nullable();
+            $table->id('id');
+
+            $table->id('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('appuser_user_users')->onDelete('cascade');
 
             $table->dateTime('arrival_time');

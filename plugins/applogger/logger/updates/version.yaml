@@ -1,5 +1,5 @@
 v1.0.1: 
   - First version of Logger
-  - create_logs_table.php
+  - 2024_0513_create_logs_table.php
 # REVIEW - je dobrým zbykom dávať do migrácií timestamp, čiže namiesto "create_logs_table.php", by sa mal mať niečo ako "2024_0513_2015_create_logs_table.php"
 # Ja osobne na toto furt zabúdam :DD a potom mi to ľudia musia písať keď mi robia review, takže odporúčam si na to čo najskôr zvyknúť

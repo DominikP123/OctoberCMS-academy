@@ -10,12 +10,10 @@ fields:
         label: username
         type: text
         span: left
-
     password:
         label: password
         type: text
         span: right
-        # REVIEW - V columns.yaml/fields.yaml nikdy nedávaj takto medzery, všetko to môže byť spolu
     token:
         label: token
         type: text

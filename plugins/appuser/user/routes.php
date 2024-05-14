@@ -2,27 +2,17 @@
 
 use AppUser\User\Middleware\authUserLogin;
 
-// REVIEW - Nepoužívaš prefix api/v1, ten by mal byť v každej API route
-// REVIEW - Tu pomeň to čo sme sa bavili :DD
 
-Route::prefix('admin/')->group(function(){
-    Route::get('user', 'AppUser\User\http\controllers\UserController@user');
-    Route::post('login', 'AppUser\User\http\controllers\Login@login');
+Route::prefix('api/v1/')->group(function(){
+
     Route::post('register', 'AppUser\User\http\controllers\Register@register');
-    Route::post('logout', 'AppUser\User\http\controllers\LogOut@logOut');
-    Route::get('logs/name', 'AppLogger\Logger\http\controllers\GetLog@getName');
-});
-
-Route::prefix('user/')->middleware([authUserLogin::class])->group(function(){
-    Route::get('user', 'AppUser\User\http\controllers\UserController@user');
     Route::post('login', 'AppUser\User\http\controllers\Login@login');
-    Route::post('logout', 'AppUser\User\http\controllers\LogOut@logOut');
-    Route::get('logs/name', 'applogger\logger\http\controllers\GetLog@getName');
 
+    Route::middleware([authUserLogin::class])->group(function(){
+
+        Route::get('user', 'AppUser\User\http\controllers\UserController@user');
+        Route::post('logout', 'AppUser\User\http\controllers\LogOut@logOut');
+        Route::get('logs/name', 'applogger\logger\http\controllers\GetLog@getName');
+    
+    });
 });
-
-
-Route::post('register', 'AppUser\User\http\controllers\Register@register');
-Route::post('login', 'AppUser\User\http\controllers\Login@login');
-Route::post('logout', 'AppUser\User\http\controllers\LogOut@logOut');
-Route::get('user', 'AppUser\User\http\controllers\UserController@user');

@@ -3,7 +3,7 @@
 use Backend\Classes\Controller;
 use Exception;
 use Illuminate\Http\Request;
-use App;
+use AppUser\User\Classes\RegisterService;
 
 class Register extends Controller
 {
@@ -11,23 +11,24 @@ class Register extends Controller
     {
         $username = $request->input('username');
         $password = $request->input('password');
-        $registerService = App::make('RegisterService');
+
+        $registerService = new RegisterService();
+        $registerService->register($username, $password);
 
         try{
 
             $token = $registerService->register($username, $password);
 
             if (!$token) {
-                // REVIEW: ak je error tak použi throw new Exception() a porieši si error handling
+
                 throw new Exception('user not found', $token);
-    
             }
 
             return response()->json($token, 201);
 
-        }catch(Exception $e){
+        }catch(Exception){
 
-            return response()->json(['error' => $e->getMessage()], 500);
+            throw new Exception('user not found');
 
         }
     }

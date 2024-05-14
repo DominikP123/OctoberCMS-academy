@@ -17,17 +17,20 @@ class LoginService extends Controller
 
             if ($user && Hash::check($password, $user->password)) {
 
-                if($user->token == null){ // REVIEW - na viacerých miestach máš takéto zbytočné medzery :DD vyzerá to kúsok divne, skôr by som dal medzeru za tým if statementom
-
+                if ($user->token == null){ // REVIEW - na viacerých miestach máš takéto zbytočné medzery :DD vyzerá to kúsok divne, skôr by som dal medzeru za tým if statementom
                     $user->token = Str::random(20); // REVIEW - táto logika na vytvorenie tokenu sa ti opakuje aj v RegisterService, možno by som to zjednotil do nejakého AuthService
-
                 }
-                $user->login_time = Carbon::now()->format('Y-m-d H:i:s'); // REVIEW - toto je asi len preferencia, ale kraršia verzia by bolo "date('Y-m-d H:i:s');"
+
+                $user->login_time = date('Y-m-d H:i:s'); // REVIEW - toto je asi len preferencia, ale kraršia verzia by bolo "date('Y-m-d H:i:s');"
 
                 $user->save();
 
-                // REVIEW - radšej to rozdeľ do viacerých riadkov nech sa to lahšie číta
-                $logData = ['user_id'=>$user->id, 'arrival_time'=>$user->login_time, 'name'=>$user->username, 'delay' => false];
+                $logData = [
+                            'user_id' => $user->id, 
+                            'arrival_time' => $user->login_time,
+                            'name' => $user->username,
+                            'delay' => false
+                            ];
 
                 $log = new Log();
                 $log->fill($logData);
@@ -37,12 +40,11 @@ class LoginService extends Controller
                 return $user->token;
             }
 
-            return response()->json(['error' => 'Unauthorized'], 401); // REVIEW - throw new Exception($message, $code)
+            throw new Exception('user not found', 401);
 
-        } catch (Exception $e){ // REVIEW - zas ti medzery :,D
+        } catch ( Exception ){ // REVIEW - zas ti medzery :,D
 
-            return response()->json(['error' => 'Internal server error'], 500); // REVIEW - throw new Exception($message, $code)
-
+            throw new Exception('Internal server error', 500);
         }
     }
 }

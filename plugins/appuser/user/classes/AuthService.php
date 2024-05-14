@@ -22,9 +22,9 @@ class AuthService extends Controller
                 'updated_at' => $user->updated_at,
 
             ]);
-        } catch(Exception $e){
-            // REVIEW - Ak sa chytil error mal by si ho znova throw-núť, nie vracať json... A možno by si mohol použiť $e->getMessage() aby si posunul message
-            return response()->json(['error' => 'Internal server error'], 500);
+            
+        } catch(Exception){
+            throw new Exception('user not found');
         }
     }
 }
