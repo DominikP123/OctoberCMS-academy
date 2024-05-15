@@ -5,28 +5,26 @@ use Illuminate\Http\Request;
 use Exception;
 use AppUser\User\Classes\LogOutService;
 
-
 class LogOut extends Controller
 {    
-    public function logOut(Request $request)
+    public function logOut()
     {
-        $token = $request->input('token');
+        $token = input('token');
 
         $logOutService = new LogOutService();
-        $logOutService->logOut($token);
+        $user = $logOutService->logOut($token);
 
         try{
-            $user = $logOutService->logOut($token);
-            if (!$user) { 
-
+            throw new Exception('nejde');
+        
+            if (!$user) {
                 throw new Exception('user not found');
-
             }     
-            
-        } catch(Exception){ // REVIEW - medzery
 
-            throw new Exception('user not found');
+            return response()->json('User has been log out');
             
+        } catch(Exception){
+            throw new Exception('user not found');
         }
     }
 }

@@ -8,25 +8,22 @@ use Exception;
 
 class UserController extends Controller
 {       
-    public function user(Request $request)
+    public function user()
     {
-        $token = $request->input('token');
+        $token = input('token');
 
         $authService = new AuthService();
         $user = $authService->getUser($token);
 
         try{
             if (!$user) {
-    
                 throw new Exception('user not found');
             }
 
-            return response()->json($user);
+            return $user;
 
-        } catch(Exception $e) {
-
+        } catch(Exception) {
             throw new Exception('user not found');
-
         }
     }
 }

@@ -29,25 +29,6 @@ class Plugin extends PluginBase
     }
 
     /**
-     * register method, called when the plugin is first registered.
-     */
-    public function register()
-    {
-        $this->app->singleton('AuthService', function ($app) {
-            return new AuthService();
-        });
-        //$this->app->singleton('LoginService', function ($app) {
-         //   return new LoginService();
-       // });
-        $this->app->singleton('LogOutService', function ($app) {
-            return new LogOutService();
-        });
-        $this->app->singleton('RegisterService', function ($app) {
-            return new RegisterService();
-        });
-    }
-
-    /**
      * registerPermissions used by the backend.
      */
     public function registerPermissions()

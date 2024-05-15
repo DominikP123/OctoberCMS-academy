@@ -7,29 +7,23 @@ use AppUser\User\Classes\RegisterService;
 
 class Register extends Controller
 {
-    public function register(Request $request)
+    public function register()
     {
-        $username = $request->input('username');
-        $password = $request->input('password');
+        $username = input('username');
+        $password = input('password');
 
         $registerService = new RegisterService();
-        $registerService->register($username, $password);
+        $token = $registerService->register($username, $password);
 
         try{
-
-            $token = $registerService->register($username, $password);
-
             if (!$token) {
-
                 throw new Exception('user not found', $token);
             }
 
-            return response()->json($token, 201);
+            return $token;
 
         }catch(Exception){
-
             throw new Exception('user not found');
-
         }
     }
 }

@@ -11,17 +11,16 @@ class LogOutService extends Controller
         try{
             $user = User::where('token', $token)->first();
 
-            if (!$user) { // REVIEW - medzery
-
+            if (!$user) {
                 throw new Exception('user not found');
-
             }     
 
             $user->token = null;
             $user->save();
 
-        } catch(Exception $e){
+            return $token;
 
+        } catch(Exception){
             throw new Exception('user not found');
         }
     }

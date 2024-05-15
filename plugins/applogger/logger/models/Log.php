@@ -1,6 +1,7 @@
 <?php namespace AppLogger\Logger\Models;
 
 use Model;
+use AppUser\User\Models\User;
 
 /**
  * Log Model
@@ -28,8 +29,7 @@ class Log extends Model
     public $belongsTo = [
         /* REVIEW - pre relation nemusíš písať celý názov pluginu a tablu, stačí 'user' => [...]
         a keďže je to one to many relation, čiže Log má jednoho usera, relation meno by malo byť v singulári, t. j. napr. 'user'
-        
-        Zároveň určite použi "use AppUser\User\Models\User;" a tu napíš už iba "User::class" */
-        'appuser_user_users' => ['AppUser/User/models/User', 'key' => 'user_id']
+        */
+        'appuser_user_users' => [[User::class], 'key' => 'user_id']
     ];
 }

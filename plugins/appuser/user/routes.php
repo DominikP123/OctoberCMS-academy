@@ -1,18 +1,22 @@
 <?php
 
 use AppUser\User\Middleware\authUserLogin;
-
+use AppUser\User\http\controllers\Login;
+use AppLogger\Logger\Http\Controllers\LoggerController;
+use AppUser\User\http\controllers\LogOut;
+use AppUser\User\http\controllers\Register;
+use AppUser\User\http\controllers\UserController;
 
 Route::prefix('api/v1/')->group(function(){
 
-    Route::post('register', 'AppUser\User\http\controllers\Register@register');
-    Route::post('login', 'AppUser\User\http\controllers\Login@login');
+    Route::post('register', [Register::class, 'register']);
+    Route::post('login', [Login::class, 'login']);
 
     Route::middleware([authUserLogin::class])->group(function(){
 
-        Route::get('user', 'AppUser\User\http\controllers\UserController@user');
-        Route::post('logout', 'AppUser\User\http\controllers\LogOut@logOut');
-        Route::get('logs/name', 'applogger\logger\http\controllers\GetLog@getName');
+        Route::get('user', [UserController::class, 'user']);
+        Route::post('logout', [LogOut::class, 'logOut']);
+        Route::get('logs/name', [LoggerController::class, 'getLogByName']);
     
     });
 });
