@@ -1,7 +1,6 @@
 <?php namespace AppUser\User\http\controllers;
 
 use Backend\Classes\Controller;
-use Illuminate\Http\Request;
 use Exception;
 use AppUser\User\Classes\LogOutService;
 

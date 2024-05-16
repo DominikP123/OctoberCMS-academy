@@ -24,12 +24,14 @@ class Log extends Model
     /**
      * @var array rules for validation
      */
-    public $rules = []; // REVIEW - rules by som si určite zadefinoval
+    public $rules = [
+        'user_id' => 'required|integer|exists:id',
+        'arrival_time' => 'required|date_format:Y-m-d H:i:s',
+        'name' => 'required|string|max:255',
+        'delay' => 'boolean'
+    ]; 
 
     public $belongsTo = [
-        /* REVIEW - pre relation nemusíš písať celý názov pluginu a tablu, stačí 'user' => [...]
-        a keďže je to one to many relation, čiže Log má jednoho usera, relation meno by malo byť v singulári, t. j. napr. 'user'
-        */
-        'appuser_user_users' => [[User::class], 'key' => 'user_id']
+        'user' => [[User::class], 'key' => 'user_id']
     ];
 }

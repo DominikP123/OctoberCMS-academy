@@ -4,8 +4,6 @@ use Closure;
 use Illuminate\Http\Request;
 use AppUser\User\Models\User;
 
-
-
 class authUserLogin
 {
     public function handle(Request $request, Closure $next) 

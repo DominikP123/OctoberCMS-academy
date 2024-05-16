@@ -26,9 +26,14 @@ class User extends Model
     /**
      * @var array rules for validation
      */
-    public $rules = [];
+    public $rules = [
+        'username' => 'required|unique:appuser_user_users,username|max:255',
+        'password' => 'requireed|string|max:255',
+        'token' => 'nullable|string|max:255',
+        'delay' => 'boolean'
+    ];
   
     public $hasMany = [
-        'applogger_logger_logs' => ['AppLogger/Models/Log', 'key' => 'user_id']
+        'logs' => ['AppLogger/Models/Log', 'key' => 'user_id']
     ];
 }

@@ -2,7 +2,6 @@
 
 use Backend\Classes\Controller;
 use Exception;
-use Illuminate\Http\Request;
 use AppUser\User\Classes\RegisterService;
 
 class Register extends Controller

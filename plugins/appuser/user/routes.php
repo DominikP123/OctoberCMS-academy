@@ -16,7 +16,7 @@ Route::prefix('api/v1/')->group(function(){
 
         Route::get('user', [UserController::class, 'user']);
         Route::post('logout', [LogOut::class, 'logOut']);
-        Route::get('logs/name', [LoggerController::class, 'getLogByName']);
+        Route::get('logs/{name}/arrivals', [LoggerController::class, 'getLogByName']);
     
     });
 });

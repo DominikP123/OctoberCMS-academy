@@ -3,7 +3,6 @@
 use Backend\Classes\Controller;
 use AppLogger\Logger\Models\Log;
 
-
 class LoggerController extends Controller
 {
     public function createLog()
@@ -24,11 +23,9 @@ class LoggerController extends Controller
         return $logs;
     }
 
-    public function getLogByName()
+    public function getLogByName($name)
     {
-        $name = input('name');
-        // REVIEW - a zároveň tu by som trochu iným spôsobom poriešil vracanie týchto časov. Využil by som funkciu ->pluck(), v Laravel docs nájdeš ako sa to používa. čiže budeš mať Log::where(...)->get()->pluck(...);
-        $log = Log::where('name', $name)->get(['arrival_time']);
+        $log = Log::where('name', $name)->get()->pluck('arrival_time');
 
         return $log;
     }
