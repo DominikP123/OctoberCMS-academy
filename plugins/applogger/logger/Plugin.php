@@ -28,16 +28,11 @@ class Plugin extends PluginBase
         ];
     }
 
-    // REVIEW: funkcie čo nepoužívaš môžeš dať kľudne preč nech sa kód lahšie číta
-    //done
-    // REVIEW ešte tu máš registerComponents() a registerPermissions() ktoré nič nerobia lebo hneď na začiatku je return [];
     /**
      * registerComponents used by the frontend.
      */
     public function registerComponents()
     {
-        return []; // Remove this line to activate
-
         return [
             'AppLogger\Logger\Components\MyComponent' => 'myComponent',
         ];
@@ -48,8 +43,6 @@ class Plugin extends PluginBase
      */
     public function registerPermissions()
     {
-        return []; // Remove this line to activate
-
         return [
             'applogger.logger.some_permission' => [
                 'tab' => 'Logger',
