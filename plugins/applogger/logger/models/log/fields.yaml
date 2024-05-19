@@ -4,17 +4,17 @@
 
 fields:
     user_id:
-        label: id
+        label: id # REVIEW Tu by som len uprabil label aby bolo jasné že sa jedná o ID usera, nie o ID logu
         type: text
     delay:
         label: delay
         type: switch
-        default: false
+        default: false # REVIEW Toto tu môže byť, ale nemusí, switch tak či tak default bude vypnutý. Je na tebe či to tu necháš alebo nie...
     name:
         label: username
         type: text
         span: left
     arrival_time:
         label: arrival time
-        type: text
+        type: text # REVIEW Keďže arrival_time je timestamp, kľudne môžeš field nastaviť na nejaký dátum type, a bude to fungovať (a ľahšie sa s tým bude pracovať v CMS)
         span: right

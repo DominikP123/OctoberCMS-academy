@@ -31,7 +31,7 @@ class Plugin extends PluginBase
     /**
      * registerComponents used by the frontend.
      */
-    public function registerComponents()
+    public function registerComponents() // REVIEW Toto používaš?
     {
         return [
             'AppLogger\Logger\Components\MyComponent' => 'myComponent',
@@ -41,7 +41,7 @@ class Plugin extends PluginBase
     /**
      * registerPermissions used by the backend.
      */
-    public function registerPermissions()
+    public function registerPermissions() // REVIEW Toto používaš?
     {
         return [
             'applogger.logger.some_permission' => [

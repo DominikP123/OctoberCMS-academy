@@ -31,7 +31,7 @@ class Plugin extends PluginBase
     /**
      * registerPermissions used by the backend.
      */
-    public function registerPermissions()
+    public function registerPermissions() // REVIEW Toto používaš?
     {
         return [
             'appuser.user.some_permission' => [

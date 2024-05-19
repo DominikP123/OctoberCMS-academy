@@ -15,7 +15,7 @@ class AuthService extends Controller
                 throw new Exception('user not found');
             } 
 
-            return response()->json([
+            return response()->json([ // REVIEW - response()->json([...]) je zvytočne komplikované, keď dáš return [...] tak sa to aj tak vráti ako json
                 'username' => $user->username,
                 'delay' => $user->delay,
                 'created_at' => $user->created_at,
@@ -25,6 +25,9 @@ class AuthService extends Controller
             
         } catch(Exception){
             throw new Exception('user not found');
+            /* REVIEW - Tu sa ti 2-krát opakuje 'user not found'. Ak chytáš error cez catch() mal by si skôr získať message erroru ktorý sa chytil.
+            To vieš urobiť tak že do catch() parametrov dáš catch(Exception $e), a následne získaš z tohto $e jeho message - ->getMessage()
+            Takto to sprav globálne na projekte nech sa ti neopakujú error messages */
         }
     }
 }

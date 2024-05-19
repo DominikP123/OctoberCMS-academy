@@ -34,6 +34,6 @@ class User extends Model
     ];
   
     public $hasMany = [
-        'logs' => ['AppLogger/Models/Log', 'key' => 'user_id']
+        'logs' => ['AppLogger/Models/Log', 'key' => 'user_id'] // REVIEW model nie ako cesta, ale ako class cez use...
     ];
 }
