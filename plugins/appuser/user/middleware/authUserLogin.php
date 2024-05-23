@@ -3,7 +3,6 @@
 use Closure;
 use Illuminate\Http\Request;
 use AppUser\User\Models\User;
-use Exception;
 
 class authUserLogin
 {

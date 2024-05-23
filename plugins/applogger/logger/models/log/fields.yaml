@@ -9,7 +9,6 @@ fields:
     delay:
         label: delay
         type: switch
-        default: false # REVIEW Toto tu môže byť, ale nemusí, switch tak či tak default bude vypnutý. Je na tebe či to tu necháš alebo nie...
     name:
         label: username
         type: text

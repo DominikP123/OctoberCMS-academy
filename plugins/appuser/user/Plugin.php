@@ -1,12 +1,7 @@
 <?php namespace AppUser\User;
 
-use AppUser\User\Classes\AuthService;
 use Backend;
 use System\Classes\PluginBase;
-use AppUser\User\Classes\LoginService;
-use AppUser\User\Classes\LogOutService;
-use AppUser\User\Classes\RegisterService;
-
 
 /**
  * Plugin Information File
