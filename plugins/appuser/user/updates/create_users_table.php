@@ -18,7 +18,7 @@ return new class extends Migration
     {
         Schema::create('appuser_user_users', function(Blueprint $table) {
 
-            $table->id('id'); // REVIEW $table->id()
+            $table->id();
 
             $table->string('username')->unique();
             $table->string('password');

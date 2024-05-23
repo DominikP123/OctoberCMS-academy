@@ -3,6 +3,7 @@
 use Closure;
 use Illuminate\Http\Request;
 use AppUser\User\Models\User;
+use Exception;
 
 class authUserLogin
 {
@@ -10,7 +11,6 @@ class authUserLogin
     {
         $token= $request->input('token');
         $user = User::where('token', $token)->first();
-
         if($user != null){
             return $next($request);
         }

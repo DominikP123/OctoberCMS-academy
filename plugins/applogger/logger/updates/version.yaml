@@ -1,3 +1,6 @@
-v1.0.1: 
+v1.0.1:
   - First version of Logger
   - 2024_0513_create_logs_table.php # Skús zbehnúť 'php artisan migrate:fresh' a 'php artisan october:migrate', to ti vlastne zresetuje DB (uvidíš že ti to nepôjde, skús to sám fixnúť)
+v1.0.2: 
+  - fix table
+  - create_logs_table.php

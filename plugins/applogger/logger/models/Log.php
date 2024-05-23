@@ -25,15 +25,13 @@ class Log extends Model
      * @var array rules for validation
      */
     public $rules = [
-        'user_id' => 'required|integer|exists:id', // REVIEW Táto 'exists' podmienka asi nebude dobre, mal by si tam zadefinovať table. Pozri october docs
-        'arrival_time' => 'required|date_format:Y-m-d H:i:s', // REVIEW Ak v fields.yaml nastavíš toto na type dátumu, tak túto 'date_format' podmienku za teba urobí october
+        'user_id' => 'required|integer|exists:appuser_user_users,id', 
+        'arrival_time' => 'required|date',
         'name' => 'required|string|max:255',
         'delay' => 'boolean'
     ]; 
 
     public $belongsTo = [
-        'user' => [[User::class], 'key' => 'user_id']
-        // REVIEW Prečo dávaš ten User::class do ďalšieho array? (Odpoveď mi kľudne napíš do channelu)
-        // REVIEW Potrebuješ v tomto prípade zadávať 'key'? (Odpoveď mi kľudne napíš do channelu)
+        'user' => [User::class]
     ];
 }

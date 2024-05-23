@@ -1,32 +1,71 @@
 <?php namespace AppUser\User\http\controllers;
 
 use Backend\Classes\Controller;
-use Illuminate\Http\Request;
-use AppUser\User\Classes\AuthService;
+use AppUser\User\Models\User;
 use Exception;
-
+use AppUser\User\Classes\Services;
 
 class UserController extends Controller
-{       
+{     
+    public function register()
+    {
+        $username = input('username');
+        $password = input('password');
+
+        $registerService = new Services();
+        $token = $registerService->register($username, $password);
+
+        if (!$token) {
+            throw new Exception('user not found', $token);
+        }
+
+        return $token;
+    }
+
+    public function login()
+    {
+        $username = input('username');
+        $password = input('password');
+
+        $loginService = new Services();
+        $token = $loginService->login($username, $password);
+
+        if (!$token) { 
+            throw new Exception('user not found', $token);
+        }
+
+        return $token;
+    }
+
+    public function logOut()
+    {
+        $token = input('token');
+
+        $logOutService = new Services();
+        $user = $logOutService->logOut($token);
+
+        if (!$user) {
+            throw new Exception('user not found');
+        }     
+
+        return response()->json('User has been log out');
+    }
+
     public function user()
     {
         $token = input('token');
 
-        $authService = new AuthService();
-        /* REVIEW Logika ktorá je v AuthService by mohla byť kľudne napísaná rovno tu, keďže nikde inde okrem UserController.php ju nepoužívaš */
-        $user = $authService->getUser($token);
+        $user = User::where('token', $token)->first();
 
-        try{
-            /* REVIEW úplne nechápem význam try-catch blockov ktoré si pridal na rôznych miestach, v prípadoch ako sú tieto môžeš rovno hodiť error bez toho a bude to mať rovnaký efekt
-            Keď som hovoril že máš zapracovať error handling tak som myslel aby si nahradil response(..., 500) za throw new Exception(), try-catch treba v iných situáciach... */
-            if (!$user) {
-                throw new Exception('user not found');
-            }
-
-            return $user;
-
-        } catch(Exception) {
+        if (!$user) {
             throw new Exception('user not found');
-        }
+        } 
+
+        return ([ 
+            'username' => $user->username,
+            'delay' => $user->delay,
+            'created_at' => $user->created_at,
+            'updated_at' => $user->updated_at,
+        ]);
     }
 }

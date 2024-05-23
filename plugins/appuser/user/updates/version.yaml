@@ -1,3 +1,4 @@
 v1.0.1: 
   - First version of User
-  - create_users_table.php # REVIEW timestamp ako pri logoch
+  - create_users_table.php
+v1.0.2: 2024_0513_create_logs_table

@@ -4,7 +4,7 @@
 
 fields:
     user_id:
-        label: id # REVIEW Tu by som len uprabil label aby bolo jasné že sa jedná o ID usera, nie o ID logu
+        label: User id
         type: text
     delay:
         label: delay
@@ -16,5 +16,7 @@ fields:
         span: left
     arrival_time:
         label: arrival time
-        type: text # REVIEW Keďže arrival_time je timestamp, kľudne môžeš field nastaviť na nejaký dátum type, a bude to fungovať (a ľahšie sa s tým bude pracovať v CMS)
+        type: datepicker
+        mode: datetime
         span: right
+        format: Y-m-d H:i:s

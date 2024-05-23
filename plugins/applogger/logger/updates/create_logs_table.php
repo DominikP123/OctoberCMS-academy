@@ -3,6 +3,7 @@
 use Schema;
 use October\Rain\Database\Schema\Blueprint;
 use October\Rain\Database\Updates\Migration;
+use AppUser\User\Models\User;
 
 /**
  * CreateLogsTable Migration
@@ -18,16 +19,9 @@ return new class extends Migration
     {
         Schema::create('applogger_logger_logs', function(Blueprint $table) {
 
-            $table->id('id');
-            // REVIEW Keď dáš $table->id('id') je to to isté ako $table->id()
-
-            /* REVIEW $table->id() vytvorí auto-incrementing column, čo nesedí keďže tento column má iba ukazovať na user záznam...
-            Toto zmeň na základe toho čo sme sa bavili, čiže použi ->foreignIdFor() */
-            $table->id('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('appuser_user_users')->onDelete('cascade');
-
-            $table->dateTime('arrival_time');
-            // REVIEW radšej použí timestamp namiesto dateTime
+            $table->id();
+            $table->foreignIdFor(User::class);
+            $table->timestamp('arrival_time');
             $table->string('name');
             $table->boolean('delay');
 

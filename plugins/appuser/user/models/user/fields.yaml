@@ -14,11 +14,10 @@ fields:
         label: password
         type: text
         span: right
-    token: # REVIEW Dáva zmysel ukazovať token v cms? (Odpoveď do channel...)
+    token:
         label: token
         type: text
         disabled: true
-    delay: # REVIEW Aký zmysel má vlastne delay pri userovy? myslím že ho všade nastavuješ iba na falsa a inak sa s tým nerobí. či? (Odpoveď do channel...)
-        label: delay
+    delay: 
         type: switch
         default: false

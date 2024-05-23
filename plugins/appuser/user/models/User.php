@@ -1,8 +1,8 @@
 <?php namespace AppUser\User\Models;
 
 use Model;
-use \October\Rain\Database\Traits\Validation;
-use October\Rain\Database\Traits\Hashable;
+use AppLogger\Logger\Models\Log;
+
 
 /**
  * User Model
@@ -34,6 +34,6 @@ class User extends Model
     ];
   
     public $hasMany = [
-        'logs' => ['AppLogger/Models/Log', 'key' => 'user_id'] // REVIEW model nie ako cesta, ale ako class cez use...
+        'logs' => [Log::class, 'key' => 'user_id']
     ];
 }

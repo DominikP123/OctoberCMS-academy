@@ -2,17 +2,17 @@
 
 use Backend\Classes\Controller;
 use AppLogger\Logger\Models\Log;
+use Exception;
 
 class LoggerController extends Controller
 {
     public function createLog()
     {
-        $data = input(['user_id', 'arrival_time', 'name', 'delay']);
+        #$data = post();
         /* REVIEW Toto sa dá ešte viac zjednodušiť, tu vlastne vyťahuješ nejaké údaje z requestu, čiže z post(), a následne ich filluješ do logu
         namiesto toho že to najprv uložíš do $data môžeš do fill() metódy rovno dať post() a to ti vyplní tie údaje ktoré sú tam dostupné */
-
         $log = new Log();
-        $log->fill($data);
+        $log->fill(post());
         $log->save();
 
         return $log;
@@ -25,11 +25,10 @@ class LoggerController extends Controller
         return $logs;
     }
 
-    public function getLogByName($name)
+    public function getArrivalsTime($name)
     {
-        $log = Log::where('name', $name)->get()->pluck('arrival_time');
-        /* REVIEW Opäť pozor na to ako pomenúvavaš variables, tu vlastne získavaš a nakoniec vraciaš nejaké časy príchodov, čiže tu moc nesedí meno $log */
-
-        return $log;
+        $time = Log::where('name', $name)->get()->pluck('arrival_time');
+        
+        return $time;
     }
 }
