@@ -2,6 +2,7 @@
 
 use Backend\Classes\Controller;
 use AppLogger\Logger\Models\Log;
+use AppLogger\Logger\Http\Resources\LogResource;
 
 class LoggerController extends Controller
 {
@@ -11,14 +12,14 @@ class LoggerController extends Controller
         $log->fill(post());
         $log->save();
 
-        return $log;
+        return LogResource::make($log);
     }
 
     public function getLogs()
     {
         $logs = Log::all();
 
-        return $logs;
+        return LogResource::collection($logs);
     }
 
     public function getArrivalsTime($name)

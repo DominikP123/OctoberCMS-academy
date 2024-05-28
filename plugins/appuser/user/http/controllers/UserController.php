@@ -1,9 +1,11 @@
 <?php namespace AppUser\User\http\controllers;
 
+use AppUser\User\http\Resources\UserResource;
 use Backend\Classes\Controller;
 use AppUser\User\Models\User;
 use Exception;
 use AppUser\User\Classes\Services;
+use Request;
 
 class UserController extends Controller
 {     
@@ -12,8 +14,7 @@ class UserController extends Controller
         $username = input('username');
         $password = input('password');
 
-        $registerService = new Services();
-        $token = $registerService->register($username, $password);
+        $token = Services::register($username, $password);
 
         if (!$token) {
             throw new Exception('user not found', $token);
@@ -27,8 +28,7 @@ class UserController extends Controller
         $username = input('username');
         $password = input('password');
 
-        $loginService = new Services();
-        $token = $loginService->login($username, $password);
+        $token = Services::login($username, $password);
 
         if (!$token) { 
             throw new Exception('user not found', $token);
@@ -41,8 +41,7 @@ class UserController extends Controller
     {
         $token = input('token');
 
-        $logOutService = new Services();
-        $user = $logOutService->logOut($token);
+        $user = Services::logOut($token);
 
         if (!$user) {
             throw new Exception('user not found');
@@ -53,7 +52,7 @@ class UserController extends Controller
 
     public function user()
     {
-        $token = input('token');
+        $token = request()->bearerToken();
 
         $user = User::where('token', $token)->first();
 
@@ -61,11 +60,6 @@ class UserController extends Controller
             throw new Exception('user not found');
         } 
 
-        return ([ 
-            'username' => $user->username,
-            'delay' => $user->delay,
-            'created_at' => $user->created_at,
-            'updated_at' => $user->updated_at,
-        ]);
+        return UserResource::make($user);
     }
 }

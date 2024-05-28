@@ -8,8 +8,9 @@ class authUserLogin
 {
     public function handle(Request $request, Closure $next) 
     {
-        $token= $request->input('token');
+        $token = request()->bearerToken();
         $user = User::where('token', $token)->first();
+
         if($user != null){
             return $next($request);
         }
