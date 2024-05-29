@@ -14,10 +14,10 @@ class UserController extends Controller
         $username = input('username');
         $password = input('password');
 
-        $token = Services::register($username, $password);
+        $token = Services::register($username, $password); // REVIEW pri každej statickej funkcii z Services.php mi to tu ukazuje že tie funkcie nemáš nastavené ako static, tebe to ukazuje taký modrý underline?
 
         if (!$token) {
-            throw new Exception('user not found', $token);
+            throw new Exception('user not found', $token); // REVIEW Tu moc nedáva zmysel checkovať token keďže register ti buď hodí error pri savovaní alebo prejde v pohode, daj vedieť či ti to dáva zmysel
         }
 
         return $token;
@@ -31,7 +31,7 @@ class UserController extends Controller
         $token = Services::login($username, $password);
 
         if (!$token) { 
-            throw new Exception('user not found', $token);
+            throw new Exception('user not found', $token); // REVIEW Podobne ako pri register mi tu moc nedáva zymsel tento check
         }
 
         return $token;
@@ -39,12 +39,12 @@ class UserController extends Controller
 
     public function logOut()
     {
-        $token = input('token');
+        $token = input('token'); // REVIEW Toto nepremeníš tiež na header bearerToken?
 
         $user = Services::logOut($token);
 
         if (!$user) {
-            throw new Exception('user not found');
+            throw new Exception('user not found'); // REVIEW Tu dokonca máš napísané že logOut vracia $user aj keď vracia $token
         }     
 
         return response()->json('User has been log out');
@@ -60,6 +60,6 @@ class UserController extends Controller
             throw new Exception('user not found');
         } 
 
-        return UserResource::make($user);
+        return UserResource::make($user); // REVIEW Chválim resource xDD
     }
 }

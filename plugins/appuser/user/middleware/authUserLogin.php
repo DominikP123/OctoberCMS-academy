@@ -14,7 +14,7 @@ class authUserLogin
         if($user != null){
             return $next($request);
         }
-        
+        // REVIEW Bolo by dobré hodiť nejaký error ak zlyhá autentifikácia
     }
     
 }

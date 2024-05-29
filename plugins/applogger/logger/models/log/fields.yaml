@@ -13,7 +13,7 @@ fields:
         label: username
         type: text
         span: left
-    arrival_time:
+    arrival_time: # REVIEW V cmd máš ako keby 2 fiekdy pre tento datetime, aj keď v tom prvom sa ti zobrazuje aj dátum aj čas zároveň, je to trochu confusing
         label: arrival time
         type: datepicker
         mode: datetime

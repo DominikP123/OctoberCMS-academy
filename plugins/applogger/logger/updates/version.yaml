@@ -1,8 +1,8 @@
 v1.0.1:
-  - First version of Logger
+  - First version of Logger # REVIEW Trochu divné mať prvú verziu bez toho aby tam bola nejaká migrácia, momentálne tam máš iba message
 v1.0.2: 
   - fix table
-  - create_logs_table.php
+  - create_logs_table.php # REVIEW Na každú migráciu treba dávať timestamp
 v1.0.3:
   - add email column in table
   - 2024_0528_1700_add_email_column.php
