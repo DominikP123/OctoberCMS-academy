@@ -11,7 +11,7 @@ class Services extends Controller
 {
     
 
-    public function register($username, $password)
+    public static function register($username, $password)
     {
         $user = new User;
 
@@ -26,7 +26,7 @@ class Services extends Controller
         return $user->token;
     }
 
-    public function logOut($token)
+    public static function logOut($token)
     {
         $user = User::where('token', $token)->first();
 
@@ -40,7 +40,7 @@ class Services extends Controller
         return $token;
     }
 
-    public function login($username, $password)
+    public static function login($username, $password)
     {   
         try{
             $user = User::where('username', $username)->first();
@@ -55,44 +55,27 @@ class Services extends Controller
                 $user->save();
 
                 $logData = [
-                            'user_id' => $user->id, 
-                            'arrival_time' => $user->login_time,
-                            'name' => $user->username,
-                            'delay' => false
-                            ];
-                /* REVIEW Zvláštne odsadenie :DD keď máš začiatok array/objektu/funkcie, tak tá uzavieracia zátvorka by mala byť na rovnakom odsadení ako začiatku array/objektu/funkcie
-                A hodnoty alebo kód ktorý dávaš dovnútra je o jeden tab dopredu, čiže napr:
-
-                $arr = [
-                    'key' => 'value',
-                    ...
-                ]
-
-                čiže
-
-           ---> $arr = [
-               ---> 'key' => 'value',
-               ---> ...
-           ---> ]
-                
-                */
-
+                    'user_id' => $user->id, 
+                    'arrival_time' => $user->login_time,
+                    'name' => $user->username,
+                    'delay' => false
+                    ];
                 $log = new Log();
                 $log->fill($logData);
                 $log->save();
                 
                 return $user->token;
+            } else
+            {
+                throw new Exception('wrong password', 401);
             }
 
-            throw new Exception('user not found', 401);
-            /* REVIEW Tu len vidím takú logickú nezrovnalosť... V tejto logike čo tu máš môže byť failnuť username (že sa nenájde) alebo password (že nesedí)
-            V prípade že sa user nájde a heslo zlyhá, posielaš taký istý error ako keď sa nenájde user, čo je trochu zavádzajúce. Skús to možno rozdeliť na 2 rôzne errory
-            A zároveň dobre že si použil kód 401, lenže ten sedí k prípadu kedy zlyhá heslo... Keď zlyhá username sa hodí viac 404 not found */
+            throw new Exception('user not found', 404);
 
         } catch ( Exception $e){
             throw new Exception('Internal server error: ' . $e->getMessage(), 500);
         }
     }
 
-    public function makeToken(){ return Str::random(20); }
+    public static function makeToken(){ return Str::random(20); }
 }

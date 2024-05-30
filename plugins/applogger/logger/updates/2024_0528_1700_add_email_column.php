@@ -17,7 +17,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('applogger_logger_logs', function(Blueprint $table){
-            $table->string('email');
+            $table->string('email')->nullable();
         });
     }
 };

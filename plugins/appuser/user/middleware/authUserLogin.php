@@ -3,6 +3,7 @@
 use Closure;
 use Illuminate\Http\Request;
 use AppUser\User\Models\User;
+use Exception;
 
 class authUserLogin
 {
@@ -14,7 +15,7 @@ class authUserLogin
         if($user != null){
             return $next($request);
         }
-        // REVIEW Bolo by dobré hodiť nejaký error ak zlyhá autentifikácia
+        throw new Exception('Authentification failed');
     }
     
 }

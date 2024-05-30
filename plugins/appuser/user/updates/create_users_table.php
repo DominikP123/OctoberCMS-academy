@@ -3,6 +3,7 @@
 use Schema;
 use October\Rain\Database\Schema\Blueprint;
 use October\Rain\Database\Updates\Migration;
+use Illuminate\Support\Facades\DB;
 
 /**
  * CreateUsersTable Migration
@@ -24,7 +25,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('token')->nullable();
             $table->boolean('delay');
-            $table->dateTime('login_time');
+            $table->dateTime('login_time')->default(DB::raw('CURRENT_TIMESTAMP'));
 
             $table->timestamps();
             
