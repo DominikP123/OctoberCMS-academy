@@ -7,6 +7,7 @@ use Hash;
 use Exception;
 use AppLogger\Logger\Models\Log;
 
+
 class Services extends Controller
 {
     
@@ -16,7 +17,7 @@ class Services extends Controller
         $user = new User;
 
         $user->username = $username;
-        $user->password = Hash::make($password);
+        $user->password = $password;
         $user->token = Services::makeToken();
         $user->delay = false;
         $user->login_time = date('Y-m-d H:i:s');
@@ -32,8 +33,7 @@ class Services extends Controller
 
         if (!$user) {
             throw new Exception('user not found');
-        }     
-
+        }
         $user->token = null;
         $user->save();
 
@@ -42,36 +42,34 @@ class Services extends Controller
 
     public static function login($username, $password)
     {   
-        try{
+        try {
             $user = User::where('username', $username)->first();
-            
-            if ($user && Hash::check($password, $user->password)) {
-
-                if ($user->token == null){ 
+            if(!$user){
+                throw new Exception('User not found', 404);
+            }
+            if (Hash::check($password, $user->password)) {
+                if ($user->token == null) {
                     $user->token = Services::makeToken();
                 }
-
+    
                 $user->login_time = date('Y-m-d H:i:s');
                 $user->save();
-
+    
                 $logData = [
-                    'user_id' => $user->id, 
+                    'user_id' => $user->id,
                     'arrival_time' => $user->login_time,
                     'name' => $user->username,
                     'delay' => false
-                    ];
+                ];
                 $log = new Log();
                 $log->fill($logData);
                 $log->save();
-                
+
                 return $user->token;
-            } else
-            {
-                throw new Exception('wrong password', 401);
+
+            } else {
+                throw new Exception('Wrong password', 401);
             }
-
-            throw new Exception('user not found', 404);
-
         } catch ( Exception $e){
             throw new Exception('Internal server error: ' . $e->getMessage(), 500);
         }

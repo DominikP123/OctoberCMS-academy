@@ -2,7 +2,8 @@
 
 use Model;
 use AppLogger\Logger\Models\Log;
-
+use Hash;
+use AppUser\User\Classes\Services;
 
 /**
  * User Model
@@ -21,7 +22,7 @@ class User extends Model
 
     protected $hidden = ['password', 'token'];
 
-    protected $hashable = ['password'];
+    //protected $hashable = ['password'];
 
     /**
      * @var array rules for validation
@@ -36,4 +37,15 @@ class User extends Model
     public $hasMany = [
         'logs' => [Log::class, 'key' => 'user_id']
     ];
+
+    public function beforeSave()
+    {
+        if ($this->isDirty('password') && !empty($this->password)) {
+            $this->password = Hash::make($this->password);
+        }
+        
+        if(empty($this->token)){
+            $this->token = Services::makeToken();
+        }
+    }
 }

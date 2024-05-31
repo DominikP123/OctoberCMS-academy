@@ -1,10 +1,7 @@
 <?php namespace AppUser\User\Controllers;
 
-use Log;
-use AppUser\User\Classes\Services;
 use BackendMenu;
 use Backend\Classes\Controller;
-use Hash;
 
 /**
  * Users Backend Controller
@@ -41,28 +38,5 @@ class Users extends Controller
         parent::__construct();
 
         BackendMenu::setContext('AppUser.User', 'user', 'users');
-    }
-    
-    public function formBeforeSave($model)
-    {
-        $model->fill(post('User'));
-
-        if ($model->isDirty('password') && !empty($model->password)) {
-            Log::info('Password before hashing: ' . $model->password);
-            $model->password = Hash::make($model->password);
-            Log::info('Password after hashing: ' . $model->password);
-        } else {
-            Log::info('Password field is not set or not changed.');
-        }
-  
-        $model->token = Services::makeToken();
-
-        Log::info('Model attributes after save: ' . json_encode($model->attributes));
-    }
-
-    public function formAfterSave($model)
-    {
-        Log::info('Model saved: ' . json_encode($model->attributes));
-
     }
 }

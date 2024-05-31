@@ -2,6 +2,7 @@
 
 use Model;
 use AppUser\User\Models\User;
+use Hash;
 
 /**
  * Log Model
